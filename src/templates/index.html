@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Chatbot básico</h1>
+        <p>Habla o escribe para interactuar con el bot.</p>
+      </header>
+
+      <section id="chat" aria-live="polite"></section>
+
+      <form id="chat-form">
+        <label class="sr-only" for="message">Escribe tu mensaje</label>
+        <input
+          id="message"
+          name="message"
+          type="text"
+          placeholder="Escribe un mensaje"
+          autocomplete="off"
+          required
+        />
+        <button type="submit">Enviar</button>
+        <button type="button" id="mic-button" aria-pressed="false" title="Hablar">
+          🎤
+        </button>
+      </form>
+    </main>
+
+    <template id="message-template">
+      <article class="message">
+        <div class="author"></div>
+        <div class="text"></div>
+      </article>
+    </template>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </body>
+</html>
