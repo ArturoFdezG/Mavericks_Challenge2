@@ -28,14 +28,14 @@ src/
 ## Puesta en marcha en GitHub Codespaces
 
 1. Crea el entorno Codespace y asegúrate de tener Python 3.11+ disponible.
-2. Instala dependencias:
+2. Instala las dependencias del proyecto:
    ```bash
-   pip install flask
+   pip install -r requirements.txt
    ```
-3. Inicia el servidor:
+3. Arranca la aplicación en modo local exponiendo el puerto 8000:
    ```bash
    python src/server.py
    ```
-4. Abre el puerto `8000` en el Codespace y visita la URL publicada para ver el chatbot con entrada de texto y micrófono (Web Speech API).
+4. Publica el puerto `8000` en Codespaces y abre la URL resultante en tu navegador. Verás el chatbot listo para la primera interacción con botones rápidos y entrada de texto o voz (Web Speech API).
 
 > El ejemplo implementa un bot “eco”: repite el mensaje del usuario tras unos segundos. El reconocimiento de voz depende del soporte del navegador.
