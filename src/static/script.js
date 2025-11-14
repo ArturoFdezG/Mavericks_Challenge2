@@ -3,6 +3,7 @@ const messageInput = document.getElementById("message");
 const chatContainer = document.getElementById("chat");
 const template = document.getElementById("message-template");
 const micButton = document.getElementById("mic-button");
+const optionButtons = document.querySelectorAll(".option-button");
 
 const synth = window.speechSynthesis;
 const SpeechRecognition =
@@ -58,6 +59,38 @@ form.addEventListener("submit", (event) => {
   }, 450);
 });
 
+optionButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const option = button.dataset.option;
+    if (!option) return;
+
+    let userMessage = "";
+    let botResponse = "";
+
+    switch (option) {
+      case "qa":
+        userMessage = "Quiero hacer una consulta de Q&A";
+        botResponse =
+          "Perfecto, cuéntame tu pregunta y buscaré la mejor respuesta disponible.";
+        break;
+      case "mortgage":
+        userMessage = "Necesito información sobre hipotecas";
+        botResponse =
+          "Claro, puedo ayudarte con información sobre hipotecas, cálculos y requisitos.";
+        break;
+      default:
+        return;
+    }
+
+    addMessage("Tú", userMessage);
+
+    setTimeout(() => {
+      addMessage("Bot", botResponse);
+      speak(botResponse);
+    }, 250);
+  });
+});
+
 function addMessage(author, text) {
   const fragment = template.content.cloneNode(true);
   fragment.querySelector(".author").textContent = author;
@@ -74,4 +107,4 @@ function speak(text) {
   synth.speak(utterance);
 }
 
-addMessage("Bot", "¡Hola! ¿En qué puedo ayudarte?");
+addMessage("Bot", "¿En qué te puedo ayudar hoy?");
