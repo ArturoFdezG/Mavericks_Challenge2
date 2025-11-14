@@ -3,7 +3,27 @@ const messageInput = document.getElementById("message");
 const chatContainer = document.getElementById("chat");
 const template = document.getElementById("message-template");
 const micButton = document.getElementById("mic-button");
+const optionsContainer = document.querySelector(".options");
 const optionButtons = document.querySelectorAll(".option-button");
+let hasInteracted = false;
+
+function handleFirstInteraction() {
+  if (hasInteracted) {
+    return;
+  }
+
+  hasInteracted = true;
+
+  if (optionsContainer) {
+    optionsContainer.classList.add("options--hidden");
+    optionsContainer.setAttribute("aria-hidden", "true");
+
+    optionsContainer.querySelectorAll("button").forEach((button) => {
+      button.disabled = true;
+      button.setAttribute("tabindex", "-1");
+    });
+  }
+}
 
 const synth = window.speechSynthesis;
 const SpeechRecognition =
@@ -49,6 +69,7 @@ form.addEventListener("submit", (event) => {
   const text = messageInput.value.trim();
   if (!text) return;
 
+  handleFirstInteraction();
   addMessage("Tú", text);
   messageInput.value = "";
 
@@ -82,6 +103,7 @@ optionButtons.forEach((button) => {
         return;
     }
 
+    handleFirstInteraction();
     addMessage("Tú", userMessage);
 
     setTimeout(() => {
